@@ -1,26 +1,74 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using System;
+using Android.Widget;
+using Android.Content;
 
 namespace Activity1
 {
-    [Activity(Label = "Activity1", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "Activity 1", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
+        //EditText inputBill;
+        //Button calculateButton;
+        //TextView outputTip;
+        //TextView outputTotal;
+        TextView name;
+        Button alertButton;
+        Button activityButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.myButton);
+            //inputBill = FindViewById<EditText>(Resource.Id.inputBill);
+            //calculateButton = FindViewById<Button>(Resource.Id.calculateButton);
+            //outputTip = FindViewById<TextView>(Resource.Id.outputTip);
+            //outputTotal = FindViewById<TextView>(Resource.Id.outputTotal);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            //calculateButton = FindViewById<Button>(Resource.Id.calculateButton);
+            //calculateButton.Click += OnCalculateClick;
+            
+            name = FindViewById<TextView>(Resource.Id.name);
+            alertButton = FindViewById<Button>(Resource.Id.alertButton);
+            activityButton = FindViewById<Button>(Resource.Id.activityButton);
+
+            alertButton.Click += OnAlertClick;
+            activityButton.Click += OnActivityClick;
+        }
+
+        //void OnCalculateClick(object sender, EventArgs e)
+        //{
+        //    string text = inputBill.Text;
+        //    var bill = double.Parse(text);
+
+        //    var tip = bill * 0.15;
+        //    var total = bill + tip;
+
+        //    outputTip.Text = tip.ToString("C");
+        //    outputTotal.Text = total.ToString("C");
+        //}
+
+        void OnAlertClick(object sender, EventArgs e)
+        {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.SetTitle("Activity 1");
+            alertDialog.SetMessage(name.Text);
+            alertDialog.SetNeutralButton("Ok", delegate
+            {
+                alertDialog.Dispose();
+            });
+
+            alertDialog.Show();
+        }
+
+        void OnActivityClick(object sender, EventArgs e)
+        {
+            var otherActivity = new Intent(this, typeof(OtherActivity));
+            otherActivity.PutExtra("name", name.Text);
+            StartActivity(otherActivity);
         }
     }
 }
