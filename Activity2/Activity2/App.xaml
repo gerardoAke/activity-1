@@ -7,10 +7,12 @@
             <!-- Button Text -->
             <x:String x:Key="ButtonText">Click here</x:String>
 
+            <!-- Text Color -->
             <Style x:Key="EntryColor" TargetType="Entry">
                 <Setter Property="TextColor" Value="White" />
             </Style>
 
+            <!-- Backgroud Color -->
             <Style TargetType="Entry">
                 <Setter Property="BackgroundColor" Value="Yellow" />
             </Style>
